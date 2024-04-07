@@ -3,7 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"net/http"
-	"sample/internal/service"
+	"sample/internal/domain/user/service"
 	"sample/internal/util"
 
 	"github.com/gin-gonic/gin"

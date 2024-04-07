@@ -2,20 +2,24 @@ package controller
 
 import (
 	"net/http"
-	"sample/internal/service"
+	userRequest "sample/internal/domain/user/controller/userRequest"
+
+	"sample/internal/domain/user/usecase"
+
 	"sample/internal/util"
 
 	"github.com/gin-gonic/gin"
 )
 
 type UserController struct {
-	UserService *service.UserService
+	_usecase usecase.CreateUserUseCase
 }
 
-func InitializeUserController(userService *service.UserService, gin_Instance *gin.Engine) *UserController {
+func InitializeUserController(userUseCase usecase.CreateUserUseCase, gin_Instance *gin.Engine) *UserController {
 	_target := &UserController{
-		UserService: userService,
+		_usecase: userUseCase,
 	}
+
 	_target.setAssignRoutes(gin_Instance)
 	return _target
 }
@@ -25,18 +29,14 @@ func (_target *UserController) setAssignRoutes(gin_Instance *gin.Engine) {
 	util.PrintLogWithColor("Enter setAssignRoutes")
 	//userService := _target.UserService
 	gin_Instance.POST("/CreateNewUser", func(_ginCTX *gin.Context) {
-		var userInput struct {
-			Account  string `json:"account"`
-			Username string `json:"username"`
-			Password string `json:"password"`
-			Email    string `json:"email"`
-		}
-		if err := _ginCTX.ShouldBindJSON(&userInput); err != nil {
+		var CreateUserRequest userRequest.CreateUserRequest
+		if err := _ginCTX.ShouldBindJSON(&CreateUserRequest); err != nil {
 			_ginCTX.String(http.StatusBadRequest, "Invalid request data")
 			return
 		}
 
-		newUserID, err := _target.UserService.CreateNewUser(userInput)
+		newUserID, err := _target._usecase.CreateNewUser(CreateUserRequest)
+
 		if err != nil {
 			_ginCTX.String(http.StatusInternalServerError, "Error creating new user")
 			return

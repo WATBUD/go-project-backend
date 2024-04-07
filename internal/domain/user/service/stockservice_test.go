@@ -2,10 +2,10 @@ package service
 
 import (
 	"testing"
-	//"sample/internal/service"
+	//"sample/internal/domain/user/service"
 
-	//"sample/internal/database"
-	//"sample/internal/repository"
+	//"sample/internal/domain/user/database"
+	//"sample/internal/domain/user/repository"
 	"sample/internal/util"
 )
 

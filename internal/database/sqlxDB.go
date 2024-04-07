@@ -3,7 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
-	"sample/configs"
+	"sample/internal/configs"
 	"sample/internal/util"
 
 	"github.com/jmoiron/sqlx"

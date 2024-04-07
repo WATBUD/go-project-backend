@@ -16,7 +16,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"sample/internal/repository/model"
+	"sample/internal/domain/user/repository/model"
 )
 
 func newUserDetail(db *gorm.DB, opts ...gen.DOOption) userDetail {

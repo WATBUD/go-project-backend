@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"sample/configs"
+	"sample/internal/configs"
 	"sample/internal/util"
 
 	"gorm.io/driver/mysql"
